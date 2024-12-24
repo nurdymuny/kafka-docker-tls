@@ -4,9 +4,7 @@ set -o nounset \
     -o verbose \
     -o xtrace
 
-###############################################################################
 # Variables
-###############################################################################
 CA_PASSPHRASE="H62Rh4zA4opsOdsHylyENchmIqAldPCTa1c"
 KEYSTORE_PASSPHRASE="cjIgiPUKEyIA66bu4Hz4W1YnrZaXCskwp9F"
 KEY_PASS="ww6r0IaHBb945b9BB1oKYP6hDr5IhFpYAhz"
@@ -24,9 +22,7 @@ CA_COMMON_NAME="ca.luna.nasa.gov"
 # The list of entities (e.g., brokers, clients) for which we'll generate keystores
 ENTITIES=("broker1" "broker2" "broker3" "producer" "consumer")
 
-###############################################################################
 # Create a CA key and certificate
-###############################################################################
 openssl req \
   -new \
   -x509 \
@@ -37,9 +33,7 @@ openssl req \
   -passin  pass:"${CA_PASSPHRASE}" \
   -passout pass:"${CA_PASSPHRASE}"
 
-###############################################################################
 # Kafkacat client key/cert
-###############################################################################
 openssl genrsa \
   -des3 \
   -passout "pass:${KEYSTORE_PASSPHRASE}" \
@@ -64,9 +58,8 @@ openssl x509 \
   -CAcreateserial \
   -passin "pass:${CA_PASSPHRASE}"
 
-###############################################################################
+
 # Generate keystores and truststores for each entity (e.g., brokers, producer, consumer)
-###############################################################################
 for ENTITY in "${ENTITIES[@]}"; do
   echo "Creating keystore and truststore for: ${ENTITY}"
 

@@ -55,7 +55,7 @@ services:
 
       #KAFKA_ALLOW_EVERYONE_IF_NO_ACL_FOUND: "true"
     volumes:
-      - ./tls/:/etc/kafka/secrets #
+      - ./tls/:/etc/kafka/secrets
 
   schema-registry:
     image: confluentinc/cp-schema-registry:6.1.0
